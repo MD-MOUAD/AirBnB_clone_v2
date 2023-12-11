@@ -128,17 +128,17 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
         _id = new_instance.id
         print(_id)
+        storage.save()
         if len(line) > 1:
             line = line[1].split()
-        for elem in line:
-            if '=' in elem:
-                tup = elem.partition('=')
-                key = tup[0]
-                val = tup[2].replace('_', ' ')
-                if key and val:
-                    update_cmd = ' '.join([_cls, _id, key, val])
-                    self.do_update(update_cmd)
-        storage.save()
+            for elem in line:
+                if '=' in elem:
+                    tup = elem.partition('=')
+                    key = tup[0]9
+                    val = tup[2].replace('_', ' ')
+                    if key and val:
+                        update_cmd = ' '.join([_cls, _id, key, val])
+                        self.do_update(update_cmd)
 
     def help_create(self):
         """ Help information for the create method """
