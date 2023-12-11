@@ -134,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
             for elem in line:
                 if '=' in elem:
                     tup = elem.partition('=')
-                    key = tup[0]9
+                    key = tup[0]
                     val = tup[2].replace('_', ' ')
                     if key and val:
                         update_cmd = ' '.join([_cls, _id, key, val])
