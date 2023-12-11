@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
                 val = tup[2].replace('_', ' ')
                 if key and val:
                     update_cmd = ' '.join([_cls, _id, key, val])
-                    self.do_update(update_cmd)            
+                    self.do_update(update_cmd)
         storage.save()
 
     def help_create(self):
@@ -333,6 +333,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
