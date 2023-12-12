@@ -6,7 +6,6 @@ from sqlalchemy import Column, String, DateTime
 from sqlalchemy.orm import declarative_base
 
 
-
 Base = declarative_base()
 
 

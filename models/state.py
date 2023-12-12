@@ -7,6 +7,8 @@ from models.city import City
 from os import getenv
 
 storage_type = getenv("HBNB_TYPE_STORAGE")
+
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
@@ -15,6 +17,7 @@ class State(BaseModel, Base):
         cities = relationship('City', cascade="all,delete", backref="state")
     else:
         name = ""
+
         @property
         def cities(self):
             """returns the list of City instances with state_id

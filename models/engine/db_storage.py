@@ -14,6 +14,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 
 Base = declarative_base()
 
+
 class DBStorage:
     """This class manages storage of hbnb models in database"""
     __engine = None
@@ -29,7 +30,6 @@ class DBStorage:
         self.__engine = create_engine(db_url, pool_pre_ping=True)
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all()
-
 
     def all(self, cls=None):
         """query on the current database session (self.__session)
