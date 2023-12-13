@@ -72,3 +72,6 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
+    def close(self):
+        """doc meth"""
+        self.reload()
