@@ -42,39 +42,25 @@ class DBStorage:
         )
         self.__session = Session()
 
-    def all(self, cls=None, id=None):
+    def all(self, cls=None):
+        """query on the current database session (self.__session)
+        all objects depending of the class name
         """
-        Query all classes or specific one by ID
-        """
-        allClasses = [User, Place, State, City, Amenity, Review]
-        result = {}
-
+        all_cls_dict = {}
         if cls is not None:
-            if id is not None:
-                obj = self.__session.query(cls).get(id)
-                if obj is not None:
-                    ClassName = obj.__class__.__name__
-                    keyName = ClassName + "." + str(obj.id)
-                    result[keyName] = obj
-            else:
-                for obj in self.__session.query(cls).all():
-                    ClassName = obj.__class__.__name__
-                    keyName = ClassName + "." + str(obj.id)
-                    result[keyName] = obj
+            result = self.__session.query(cls).all()
+            for obj in result:
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                all_cls_dict[key] = obj
         else:
-            for clss in allClasses:
-                if id is not None:
-                    obj = self.__session.query(clss).get(id)
-                    if obj is not None:
-                        ClassName = obj.__class__.__name__
-                        keyName = ClassName + "." + str(obj.id)
-                        result[keyName] = obj
-                else:
-                    for obj in self.__session.query(clss).all():
-                        ClassName = obj.__class__.__name__
-                        keyName = ClassName + "." + str(obj.id)
-                        result[keyName] = obj
-        return result
+            classes = [User, State, City, Amenity, Place, Review]
+            for clss in classes:
+                result = self.__session.query(clss).all()
+                for obj in result:
+                    key = f"{obj.__class__.__name__}.{obj.id}"
+                    all_cls_dict[key] = obj
+
+        return all_cls_dict
 
     def new(self, obj):
         """add new obj"""
