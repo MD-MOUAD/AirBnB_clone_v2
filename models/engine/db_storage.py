@@ -76,10 +76,6 @@ class DBStorage:
                         result[keyName] = obj
         return result
 
-    def search(self, cls, id):
-        """ def doc """
-        data = self.all(cls)
-
     def new(self, obj):
         """add new obj"""
         if obj:
@@ -94,6 +90,3 @@ class DBStorage:
         if obj:
             self.__session.delete(obj)
 
-    def close(self):
-        """doc meth"""
-        self.__session.close()
