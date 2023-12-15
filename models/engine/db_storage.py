@@ -30,7 +30,7 @@ class DBStorage:
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None, id=None):
+    def all(self, cls=None):
         """
         Query all classes or specific one by ID
         """
@@ -38,30 +38,17 @@ class DBStorage:
         result = {}
 
         if cls is not None:
-            if id is not None:
-                obj = self.__session.query(cls).get(id)
-                if obj is not None:
-                    ClassName = obj.__class__.__name__
-                    keyName = ClassName + "." + str(obj.id)
-                    result[keyName] = obj
-            else:
-                for obj in self.__session.query(cls).all():
-                    ClassName = obj.__class__.__name__
-                    keyName = ClassName + "." + str(obj.id)
-                    result[keyName] = obj
+            for obj in self.__session.query(cls).all():
+                ClassName = obj.__class__.__name__
+                keyName = ClassName + "." + str(obj.id)
+                result[keyName] = obj
         else:
             for clss in allClasses:
-                if id is not None:
-                    obj = self.__session.query(clss).get(id)
-                    if obj is not None:
-                        ClassName = obj.__class__.__name__
-                        keyName = ClassName + "." + str(obj.id)
-                        result[keyName] = obj
-                else:
-                    for obj in self.__session.query(clss).all():
-                        ClassName = obj.__class__.__name__
-                        keyName = ClassName + "." + str(obj.id)
-                        result[keyName] = obj
+                for obj in self.__session.query(clss).all():
+                    ClassName = obj.__class__.__name__
+                    keyName = ClassName + "." + str(obj.id)
+                    result[keyName] = obj
+
         return result
 
     def new(self, obj):
