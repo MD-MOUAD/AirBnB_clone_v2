@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
         if _cls not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        new_instance = HBNBCommand.classes[_cls]()
         storage.save()
         _id = new_instance.id
         print(_id)
@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
             key = param[0]
             value = param[2].replace('_', ' ')
             if key and value:
-                update_cmd = ' '.join(_cls, _id, key, value)
+                update_cmd = f'{_cls} {_id} {key} {value}'
                 self.do_update(update_cmd)
 
     def help_create(self):
