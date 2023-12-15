@@ -8,31 +8,14 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    @property
-    def cities(self):
-        """Retruns Cities in state"""
-
-    def delete(self, obj=None):
-        """loop through __objects, compare each value
-        of key with cls argument wich is object
-        """
-        if obj:
-            id = obj.to_dict()["id"]
-            className = obj.to_dict()["__class__"]
-            keyName = className+"."+id
-            if keyName in FileStorage.__objects:
-                del (FileStorage.__objects[keyName])
-                self.save()
-
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
-        print_dict = {}
         if cls:
-            className = cls.__name__
+            _filtered_classes = {}
             for k, v in FileStorage.__objects.items():
-                if k.split('.')[0] == className:
-                    print_dict[k] = v
-            return print_dict
+                if k.split('.')[0] == cls.__name__:
+                    _filtered_classes[k] = v
+            return _filtered_classes
         else:
             return FileStorage.__objects
 
@@ -47,7 +30,7 @@ class FileStorage:
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
                 temp[key] = val.to_dict()
-            json.dump(temp, f)
+            json.dump(temp, f, indent=4)
 
     def reload(self):
         """Loads storage dictionary from file"""
@@ -58,6 +41,7 @@ class FileStorage:
         from models.city import City
         from models.amenity import Amenity
         from models.review import Review
+
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
                     'State': State, 'City': City, 'Amenity': Amenity,
@@ -72,3 +56,11 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
+    def delete(self, obj=None):
+        """deletes obj from __objects"""
+        if obj:
+            c_name = obj.to_dict()['__class__']
+            c_id = obj.to_dict()['id']
+            key = c_name + "." + c_id
+            del(FileStorage.__objects[key])
+            self.save()
