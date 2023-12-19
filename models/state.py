@@ -20,7 +20,7 @@ class State(BaseModel, Base):
         name = ""
         @property
         def cities(self):
-            """getter docuemnt"""
+            """getter for cities related to this state"""
             from models import storage
             citiesList = []
             citiesAll = storage.all(City)
