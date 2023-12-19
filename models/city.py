@@ -9,7 +9,7 @@ storage_type = getenv("HBNB_TYPE_STORAGE")
 
 
 class City(BaseModel, Base):
-    """The city class, contains state ID and name"""
+    """ City Class"""
 
     __tablename__ = "cities"
     if storage_type == "db":
