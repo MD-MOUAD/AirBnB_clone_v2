@@ -18,14 +18,12 @@ place_amenity = Table(
         String(60),
         ForeignKey("places.id"),
         primary_key=True,
-        nullable=False,
     ),
     Column(
         "amenity_id",
         String(60),
         ForeignKey("amenities.id"),
         primary_key=True,
-        nullable=False,
     ),
 )
 
@@ -63,6 +61,17 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+
+        @property
+        def reviews(self):
+            """getter for reviews related to this Place"""
+            from models import storage
+            reviews_List = []
+            All_reviews = storage.all(Review)
+            for review in All_reviews.values():
+                if review.place_id == self.id:
+                    reviews_List.append(review)
+            return reviews_List
 
         @property
         def amenities(self):
