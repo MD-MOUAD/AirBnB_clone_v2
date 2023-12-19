@@ -47,8 +47,9 @@ class BaseModel:
         """Convert instance into dict format"""
         dictionary = self.__dict__.copy()
         dictionary['__class__'] = self.__class__.__name__
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
+        for key, value in dictionary.items():
+            if isinstance(value, datetime):
+                dictionary[key] = datetime.isoformat(value)
         if '_sa_instance_state' in dictionary:
             del dictionary['_sa_instance_state']
         return dictionary
