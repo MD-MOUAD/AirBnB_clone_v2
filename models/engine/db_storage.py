@@ -44,7 +44,7 @@ class DBStorage:
         else:
             classes = [State, City, User, Place, Review, Amenity]
             # possible bug here do not add all classes if they didn't
-            # inherite from Base or if they haven't a __tablename__ 
+            # inherite from Base or if they haven't a __tablename__
             # attribute and a primary key attribute
             for clss in classes:
                 result = self.__session.query(clss).all()
