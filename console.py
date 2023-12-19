@@ -29,39 +29,6 @@ class HBNBCommand(cmd.Cmd):
              'max_guest': int, 'price_by_night': int,
              'latitude': float, 'longitude': float
             }
-    valid_keys = {
-        "BaseModel": ["id", "created_at", "updated_at"],
-        "User": [
-            "id",
-            "created_at",
-            "updated_at",
-            "email",
-            "password",
-            "first_name",
-            "last_name",
-        ],
-        "City": ["id", "created_at", "updated_at", "state_id", "name"],
-        "State": ["id", "created_at", "updated_at", "name"],
-        "Place": [
-            "id",
-            "created_at",
-            "updated_at",
-            "city_id",
-            "user_id",
-            "name",
-            "description",
-            "number_rooms",
-            "number_bathrooms",
-            "max_guest",
-            "price_by_night",
-            "latitude",
-            "longitude",
-            "amenity_ids"
-        ],
-        "Amenity": ["id", "created_at", "updated_at", "name"],
-        "Review": ["id", "created_at", "updated_at",
-                   "place_id", "user_id", "text"],
-    }
 
     def preloop(self):
         """Prints if isatty is false"""
