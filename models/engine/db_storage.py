@@ -42,7 +42,7 @@ class DBStorage:
                 key = f"{obj.__class__.__name__}.{obj.id}"
                 all_cls_dict[key] = obj
         else:
-            classes = [State, City, User, Place]
+            classes = [State, City, User, Place, Review, Amenity]
             # possible bug here do not add all classes if they didn't
             # inherite from Base or if they haven't a __tablename__ 
             # attribute and a primary key attribute
