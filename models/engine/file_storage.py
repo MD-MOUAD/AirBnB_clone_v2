@@ -64,3 +64,7 @@ class FileStorage:
             key = c_name + "." + c_id
             del(FileStorage.__objects[key])
             self.save()
+
+    def close(self):
+        """deserializing the JSON file to objects"""
+        self.reload()
