@@ -10,7 +10,13 @@ mkdir -p /data/web_static/releases/test/
 mkdir -p /data/web_static/shared/
 
 #Create a fake HTML file to test Nginx configuration
-echo "Hello Alx!" > /data/web_static/releases/test/index.html
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" > /data/web_static/releases/test/index.html
 
 #Create a symbolic link /data/web_static/current linked to the /data/web_static/releases/test/ folder.
 #If the symbolic link already exists, it should be deleted and recreated every time the script is ran.
