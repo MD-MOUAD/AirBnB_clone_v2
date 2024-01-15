@@ -24,6 +24,7 @@ def do_pack():
         return None
     return file_name
 
+
 def do_deploy(archive_path):
     """distributes an archive to the web servers"""
     if exists(archive_path) is False:
@@ -47,7 +48,6 @@ def do_deploy(archive_path):
         return False
     print("New version deployed!")
     return True
-
 
 
 def deploy():
